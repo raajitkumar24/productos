@@ -1,4 +1,4 @@
-# ProductOS — End-to-End Build Specification for Claude Code
+# ProductOS — End-to-End Build Specification
 
 **Purpose:** Build a production-grade AI Product Intelligence and Chief-of-Staff system for a Head of AI Product Management.
 
@@ -27,7 +27,7 @@
 
 ---
 
-# 0. How Claude Code Must Use This File
+# 0. How To Use This File
 
 This file is the product and engineering specification.
 
@@ -3169,7 +3169,7 @@ ProductOS V1 is complete when the user can:
 
 ---
 
-# 95. Final Build Instruction to Claude Code
+# 95. Final Build Instruction
 
 Build ProductOS incrementally.
 
