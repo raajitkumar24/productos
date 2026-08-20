@@ -40,6 +40,34 @@ ProductOS organizes the available information, shows where each material claim c
 
 The local demonstration mode is useful for exploring the workspace and workflows. Production-quality answers require an approved language model, company data, authentication, and permission-aware integrations configured by the operator.
 
+## Product UI
+
+ProductOS uses a light, focused workspace designed for product-leadership review. The screenshots below contain fictional sample data created only for documentation; they are not company facts and are not bundled into the application database.
+
+### Leadership brief
+
+The Home workspace brings documented risks, wins, upcoming decisions, and high-confidence notifications into one evidence-aware view. It explicitly preserves limitations when documentation is incomplete.
+
+![ProductOS leadership brief with fictional initiative signals, recent wins, and an evidence-limited notification](docs/images/productos-home.jpg)
+
+### Evidence-backed questions
+
+Chat answers expose application-issued citations, source quality dimensions, contradictions, and known unknowns so a leader can inspect the basis of an answer before acting on it.
+
+![ProductOS evidence-backed chat with fictional launch evidence, conflicts, and citation cards](docs/images/productos-evidence-chat.jpg)
+
+### Initiative intelligence
+
+Initiatives are reviewed across categorical health dimensions such as outcome clarity, measurement readiness, dependencies, and learning velocity. ProductOS does not collapse these dimensions into an opaque score.
+
+![ProductOS initiative intelligence with fictional health dimensions and evidence confidence](docs/images/productos-initiatives.jpg)
+
+### Product workflows and artifacts
+
+Research, strategy, product review, experiment, and decision workflows produce inspectable drafts with evidence references. Outputs remain drafts until a person reviews them.
+
+![ProductOS research workspace with fictional product briefs, decision memos, strategy artifacts, and research reports](docs/images/productos-research.jpg)
+
 ## Principles
 
 - Evidence before recommendation.

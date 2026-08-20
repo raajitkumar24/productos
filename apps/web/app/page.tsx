@@ -100,6 +100,19 @@ type OidcDiscovery = { issuer: string; authorization_endpoint: string; token_end
 const implemented: View[] = ["Home", "Chat", "Work", "Research", "Initiatives", "Team", "Attention", "Memory", "Decisions", "Evaluations", "Settings"];
 const laterItems: string[] = [];
 const suggestions = ["What is the current state of our launch?", "Review a PRD", "Think through a decision"];
+const navIcons: Record<View, string> = {
+  Home: "⌂",
+  Chat: "✦",
+  Work: "▦",
+  Research: "⌕",
+  Initiatives: "◇",
+  Team: "◎",
+  Attention: "!",
+  Memory: "◫",
+  Decisions: "✓",
+  Evaluations: "◈",
+  Settings: "⚙",
+};
 
 function parseSseBlock(block: string): { event: string; data: Record<string, unknown> } | null {
   const lines = block.split("\n");
@@ -675,24 +688,24 @@ export default function ProductOS() {
   return (
     <main className="shell">
       <aside className="sidebar">
-        <div className="brand"><span className="brandMark">P</span><span>ProductOS</span></div>
+        <div className="brand"><span className="brandMark">P</span><span className="brandText"><strong>ProductOS</strong><small>Product intelligence</small></span></div>
         <nav aria-label="Primary navigation">
           <p className="navLabel">Workspace</p>
           {implemented.map((item) => (
             <button className={item === view ? "navItem active" : "navItem"} key={item} onClick={() => setView(item)}>
-              <span className="navDot" />{item}
+              <span className="navIcon" aria-hidden="true">{navIcons[item]}</span>{item}
             </button>
           ))}
           {laterItems.map((item) => (
-            <button className="navItem" key={item} disabled><span className="navDot" />{item}<small>Later</small></button>
+            <button className="navItem" key={item} disabled><span className="navIcon" aria-hidden="true">·</span>{item}<small>Later</small></button>
           ))}
         </nav>
-        <div className="principle"><span>Operating principle</span><p>Evidence before recommendation.</p></div>
+        <div className="principle"><span className="principleIcon">◆</span><div><span>Operating principle</span><p>Evidence before recommendation.</p></div></div>
       </aside>
 
       <section className="workspace">
         <header className="topbar">
-          <div><p className="eyebrow">Persistent intelligence workspace</p><h1>{view}</h1></div>
+          <div><p className="eyebrow">Product intelligence / {view}</p><h1>{view}</h1></div>
           <div className="topActions">
             {view === "Chat" && messages.length > 0 && <button className="quietButton" onClick={newConversation}>New conversation</button>}
             {authEnabled && <button className="quietButton" onClick={signOut}>Sign out</button>}
