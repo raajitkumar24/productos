@@ -3,6 +3,10 @@ import re
 from collections.abc import AsyncIterator
 
 
+class DevelopmentModelCapabilityError(RuntimeError):
+    """Raised when deterministic local mode cannot honestly provide a capability."""
+
+
 class DevelopmentLanguageModel:
     """Transparent local adapter used until a production provider is configured."""
 
@@ -12,7 +16,9 @@ class DevelopmentLanguageModel:
         return "".join([chunk async for chunk in self.stream(prompt)])
 
     async def generate_structured(self, prompt: str, schema: type) -> object:
-        raise NotImplementedError("Structured generation is not part of Milestone 0")
+        raise DevelopmentModelCapabilityError(
+            "Structured generation requires a configured production model provider"
+        )
 
     async def stream(self, prompt: str) -> AsyncIterator[str]:
         evidence = re.findall(r'<evidence id="([^"]+)"[^>]*>(.*?)</evidence>', prompt, re.DOTALL)

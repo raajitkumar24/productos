@@ -173,6 +173,7 @@ export default function ProductOS() {
   const [evaluationTrace, setEvaluationTrace] = useState<Record<string, unknown> | null>(null);
   const [accessToken, setAccessToken] = useState<string | null>(null);
   const [authLoading, setAuthLoading] = useState(true);
+  const [apiError, setApiError] = useState("");
 
   const apiUrl = useMemo(() => process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:8000", []);
   const [userId, setUserId] = useState(process.env.NEXT_PUBLIC_PRODUCTOS_USER_ID ?? "00000000-0000-4000-8000-000000000001");
@@ -186,9 +187,16 @@ export default function ProductOS() {
     const headers = new Headers(init.headers);
     const token = accessToken ?? (typeof window !== "undefined" ? window.sessionStorage.getItem("productos.access_token") : null);
     if (token) headers.set("Authorization", `Bearer ${token}`);
-    const response = await fetch(input, { ...init, headers });
-    if (authEnabled && response.status === 401) signOut();
-    return response;
+    try {
+      const response = await fetch(input, { ...init, headers });
+      if (authEnabled && response.status === 401) signOut();
+      if (response.ok) setApiError("");
+      else if (response.status >= 500) setApiError(`The ProductOS API returned ${response.status}. Check the backend logs and configuration.`);
+      return response;
+    } catch {
+      setApiError(`ProductOS cannot connect to the API at ${apiUrl}. Start the backend and confirm NEXT_PUBLIC_API_URL and CORS settings.`);
+      return new Response(null, { status: 503, statusText: "ProductOS API unavailable" });
+    }
   }
 
   async function discovery(): Promise<OidcDiscovery> {
@@ -692,10 +700,17 @@ export default function ProductOS() {
           </div>
         </header>
 
+        {apiError && (
+          <div className="apiError" role="alert">
+            <div><strong>API connection unavailable</strong><p>{apiError}</p></div>
+            <button onClick={() => window.location.reload()}>Retry</button>
+          </div>
+        )}
+
         {view === "Home" && (
           <section className="panelPage">
             <div className="pageIntro"><div><h2>Product leadership brief</h2><p>A calm, evidence-backed view of documented changes. Missing data remains unknown, never a negative conclusion.</p></div><button onClick={generateDailyBrief} disabled={proactiveBusy}>{proactiveBusy ? "Generating…" : "Generate daily brief"}</button></div>
-            {loading || !home ? <p className="emptyList">Loading documented product state…</p> : <>
+            {loading ? <p className="emptyList">Loading documented product state…</p> : !home ? <p className="emptyList">Documented product state is unavailable. Check the API connection notice above, then retry.</p> : <>
               <div className="profileColumns">
                 <article className="dataCard"><h3>Needs attention</h3>{home.things_needing_attention.length ? home.things_needing_attention.map((item) => <div key={item.id}><p><strong>{item.observation}</strong></p><small>{item.confidence} confidence · {item.significance} significance · {item.evidence_ids.length} evidence refs</small></div>) : <p>No active high-significance documented signal.</p>}</article>
                 <article className="dataCard"><h3>Recent wins</h3>{home.recent_wins.length ? home.recent_wins.map((item) => <p key={item.id}>{item.observation}</p>) : <p>No new evidenced win is documented.</p>}</article>
@@ -845,7 +860,7 @@ export default function ProductOS() {
             <div className="pageIntro"><div><h2>Measured quality runs</h2><p>Pass rates appear only for persisted executions against operator-supplied, versioned datasets.</p></div><span className="count">{evaluationRuns.length} runs</span></div>
             {evaluationRuns.length ? <div className="artifactGrid">{evaluationRuns.map((item) => <button className="artifactCard" onClick={() => openEvaluation(item.id)} key={item.id}><div><span className="typeTag">{item.dataset_name} · {item.dataset_version}</span><span className={`statusTag ${item.status}`}>{item.status}</span></div><h3>{item.pass_rate === null ? "No measured pass rate" : `${Math.round(item.pass_rate * 100)}% pass rate`}</h3><p>{item.passed_cases} passed · {item.failed_cases} failed · {item.error_cases} errors</p><small>{item.subject_model} judged by {item.judge_model} · Inspect results →</small></button>)}</div> : <p className="emptyList">No representative-data quality run has been persisted. Configure subject and judge models, then submit an approved versioned dataset through the evaluation API.</p>}
             <div className="pageIntro"><div><h2>Evaluation coverage</h2><p>Inspectable synthetic regression definitions. Catalog validation is not a production quality result.</p></div><span className="count">{evaluations?.total_cases ?? 0} cases</span></div>
-            {loading || !evaluations ? <p className="emptyList">Loading evaluation catalog metadata…</p> : <>
+            {loading ? <p className="emptyList">Loading evaluation catalog metadata…</p> : !evaluations ? <p className="emptyList">Evaluation catalog metadata is unavailable. Check the API connection notice above, then retry.</p> : <>
               <div className="artifactGrid">{evaluations.catalogs.map((catalog) => <article className="artifactCard" key={catalog.milestone}><div><span className="typeTag">Milestone {catalog.milestone}</span><span className="statusTag active">{catalog.catalog_status}</span></div><h3>{catalog.suite}</h3><p>{catalog.case_count} cases · Primary metric: {catalog.primary_metric}</p><small>Quality execution: {catalog.execution_status}</small></article>)}</div>
               <div className="limitations"><strong>Result boundary</strong><p>{evaluations.limitation}</p></div>
             </>}

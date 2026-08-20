@@ -6,6 +6,40 @@ The repository contains all seven ProductOS V1 milestones (0–6) and the 0.8 op
 
 > ProductOS is usable locally, but it is not a hosted service. Production credentials, identity-provider settings, representative company data, and deployment approval are operator-owned inputs and are intentionally not included.
 
+## ProductOS in plain English
+
+ProductOS is a private product-leadership workspace that helps a Head of Product understand what is happening, make better decisions, and preserve the reasoning behind those decisions.
+
+Instead of searching through scattered documents, tickets, and prior conversations, a product leader can ask ProductOS questions such as:
+
+- “What evidence supports this roadmap choice?”
+- “What changed on this initiative, and what needs my attention?”
+- “Does the implementation work match the approved product specification?”
+- “What assumptions are we making, and how should we test them?”
+- “Prepare an evidence-backed agenda for my next 1:1.”
+- “What did we decide previously, and when should we revisit it?”
+
+ProductOS organizes the available information, shows where each material claim came from, calls out contradictions and missing evidence, and produces draft research reports, strategy analyses, product reviews, experiment plans, and decision memos. A leader remains responsible for reviewing and approving decisions and any external action.
+
+### A typical business workflow
+
+1. Connect approved knowledge sources such as product documents, Jira, and Confluence.
+2. Ask a question or open a working session for an initiative or decision.
+3. Review the evidence, contradictions, known unknowns, and confidence shown by ProductOS.
+4. Run a structured workflow—for example a PRD review, strategy analysis, experiment design, or 1:1 preparation.
+5. Review and refine the resulting draft before using it in a business process.
+6. Return later to inspect the decision history, updated evidence, risks, commitments, and evaluation results.
+
+### What ProductOS does not do
+
+- It does not know private company facts until approved sources are connected or content is added.
+- It does not treat missing documentation as proof that work was not done.
+- It does not rank employees or convert ticket activity into a performance score.
+- It does not silently publish documents, update business systems, or send messages.
+- It does not replace product judgment; it makes the evidence and reasoning easier to inspect.
+
+The local demonstration mode is useful for exploring the workspace and workflows. Production-quality answers require an approved language model, company data, authentication, and permission-aware integrations configured by the operator.
+
 ## Principles
 
 - Evidence before recommendation.
@@ -95,6 +129,14 @@ Open:
 
 No `.env` file is required for this local mode. Do not copy the production-oriented `.env.example` unless you intend to configure PostgreSQL or production providers.
 
+For frontend API or authentication overrides, copy the frontend-specific template:
+
+```bash
+cp apps/web/.env.example apps/web/.env.local
+```
+
+Next.js reads public frontend variables from `apps/web/.env.local` or from the deployment build environment. The root `.env` configures the backend and is not automatically loaded by Next.js.
+
 ## PostgreSQL development
 
 Start PostgreSQL 16 with pgvector:
@@ -108,6 +150,17 @@ uvicorn productos.api:app --reload --host 127.0.0.1 --port 8000
 ```
 
 The example database password is intentionally development-only. Replace it in any shared or deployed environment.
+
+## API container
+
+Build and smoke-test the same non-root API image used by CI:
+
+```bash
+docker build -f deploy/docker/api.Dockerfile -t productos-api:local .
+docker run --rm -p 8000:8000 productos-api:local
+```
+
+The command above uses ephemeral SQLite demonstration storage inside the container. A production deployment must provide PostgreSQL, OIDC, model and embedding providers, HTTPS endpoints, and secret-managed credentials as described below.
 
 ## Configuration
 

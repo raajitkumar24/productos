@@ -5,6 +5,10 @@ import pytest
 from pydantic import BaseModel
 
 from productos.config import Settings
+from productos.infrastructure.model import (
+    DevelopmentLanguageModel,
+    DevelopmentModelCapabilityError,
+)
 from productos.infrastructure.providers import (
     ModelProviderError,
     OpenAICompatibleEmbeddingProvider,
@@ -17,6 +21,13 @@ from productos.infrastructure.providers import (
 class StructuredAnswer(BaseModel):
     answer: str
     confidence: float
+
+
+@pytest.mark.asyncio
+async def test_development_model_fails_structured_generation_transparently() -> None:
+    model = DevelopmentLanguageModel()
+    with pytest.raises(DevelopmentModelCapabilityError, match="production model provider"):
+        await model.generate_structured("question", StructuredAnswer)
 
 
 @pytest.mark.asyncio
