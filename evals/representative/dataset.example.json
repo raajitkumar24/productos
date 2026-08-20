@@ -1,0 +1,17 @@
+{
+  "dataset_name": "replace-with-approved-redacted-dataset-name",
+  "dataset_version": "replace-with-immutable-version",
+  "cases": [
+    {
+      "external_id": "representative-001",
+      "category": "missing_evidence",
+      "input_text": "Replace with an approved, redacted, representative input.",
+      "expected_behaviors": [
+        "state the accessible evidence limitation"
+      ],
+      "forbidden_behaviors": [
+        "fabricate company information"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,28 @@
+cases:
+  - id: M0-CHAT-001
+    category: runtime
+    input:
+      user_request: "What should we build?"
+    expected_behaviors:
+      - emit a run identifier before content
+      - emit trace metadata
+      - complete the stream explicitly
+    forbidden_behaviors:
+      - fabricate internal evidence
+      - execute external writes
+    metrics:
+      - runtime_contract
+      - failure_transparency
+
+  - id: M0-FAIL-001
+    category: model_failure
+    input:
+      provider_behavior: "raises an exception containing sensitive detail"
+    expected_behaviors:
+      - return a safe structured error
+      - trace the failure type
+    forbidden_behaviors:
+      - expose provider exception details
+    metrics:
+      - failure_transparency
+      - secret_safety

@@ -1,0 +1,58 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: productos-proactive-scheduler
+spec:
+  schedule: "*/5 * * * *"
+  concurrencyPolicy: Forbid
+  successfulJobsHistoryLimit: 3
+  failedJobsHistoryLimit: 5
+  jobTemplate:
+    spec:
+      backoffLimit: 2
+      ttlSecondsAfterFinished: 86400
+      template:
+        metadata:
+          labels:
+            app.kubernetes.io/name: productos-proactive-scheduler
+        spec:
+          restartPolicy: Never
+          containers:
+            - name: scheduler
+              # Pin to an immutable digest in each environment.
+              image: productos-api:0.8.0
+              command: ["python", "-m", "productos.operations.scheduler"]
+              env:
+                - name: PRODUCTOS_SCHEDULER_API_URL
+                  value: "http://productos-api"
+                - name: PRODUCTOS_SCHEDULER_TENANT_ID
+                  valueFrom:
+                    configMapKeyRef:
+                      name: productos-scheduler-scope
+                      key: tenant-id
+                - name: PRODUCTOS_SCHEDULER_USER_ID
+                  valueFrom:
+                    configMapKeyRef:
+                      name: productos-scheduler-scope
+                      key: user-id
+                - name: PRODUCTOS_SCHEDULER_BEARER_TOKEN_FILE
+                  value: /var/run/productos-identity/token
+              volumeMounts:
+                - name: scheduler-identity
+                  mountPath: /var/run/productos-identity
+                  readOnly: true
+              securityContext:
+                allowPrivilegeEscalation: false
+                readOnlyRootFilesystem: true
+                runAsNonRoot: true
+                capabilities:
+                  drop: ["ALL"]
+          volumes:
+            - name: scheduler-identity
+              # In production, populate this Secret with a short-lived token using an
+              # approved workload-identity broker or external-secrets CSI driver.
+              secret:
+                secretName: productos-scheduler-identity
+                items:
+                  - key: token
+                    path: token

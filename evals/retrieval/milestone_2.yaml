@@ -1,0 +1,21 @@
+cases:
+  - {id: RAG-001, query: "What is the Atlas launch date?", source: "Atlas launches on October 14.", expected: "October 14"}
+  - {id: RAG-002, query: "Where is the pricing pilot?", source: "The pricing pilot will run in India.", expected: "India"}
+  - {id: RAG-003, query: "How long is the onboarding experiment?", source: "The onboarding experiment lasts six weeks.", expected: "six weeks"}
+  - {id: RAG-004, query: "Who owns the migration?", source: "Priya owns the data migration workstream.", expected: "Priya"}
+  - {id: RAG-005, query: "What metric is the north star?", source: "Weekly activated teams is the north-star metric.", expected: "Weekly activated teams"}
+  - {id: RAG-006, query: "What is the enterprise beta target?", source: "The enterprise beta targets 25 design partners.", expected: "25 design partners"}
+  - {id: RAG-007, query: "Why was vendor Nova rejected?", source: "Nova was rejected because it cannot meet data residency requirements.", expected: "data residency"}
+  - {id: RAG-008, query: "What is the support response objective?", source: "The support response objective is under four business hours.", expected: "four business hours"}
+  - {id: RAG-009, query: "Which segment has priority?", source: "Mid-market product teams are the priority segment.", expected: "Mid-market product teams"}
+  - {id: RAG-010, query: "What is the API reliability target?", source: "The API reliability target is 99.95 percent.", expected: "99.95 percent"}
+  - {id: RAG-011, query: "When is the decision review?", source: "The packaging decision will be reviewed after the November cohort.", expected: "November cohort"}
+  - {id: RAG-012, query: "What blocks the mobile release?", source: "Accessibility validation blocks the mobile release.", expected: "Accessibility validation"}
+  - {id: RAG-013, query: "What research method was approved?", source: "Ten moderated customer interviews were approved.", expected: "moderated customer interviews"}
+  - {id: RAG-014, query: "Where must EU customer data remain?", source: "EU customer data must remain in Frankfurt.", expected: "Frankfurt"}
+  - {id: RAG-015, query: "What is the trial conversion baseline?", source: "Trial conversion has a 12 percent baseline.", expected: "12 percent"}
+  - {id: RAG-016, query: "Which workflow is out of scope?", source: "Automated employee ranking is explicitly out of scope.", expected: "Automated employee ranking"}
+  - {id: RAG-017, query: "What is the discovery budget?", source: "Discovery has a budget ceiling of 80 thousand dollars.", expected: "80 thousand dollars"}
+  - {id: RAG-018, query: "What caused the retention decline?", source: "Evidence links the retention decline to failed workspace invitations.", expected: "failed workspace invitations"}
+  - {id: RAG-019, query: "What assumption remains unvalidated?", source: "The willingness-to-pay assumption remains unvalidated.", expected: "willingness-to-pay"}
+  - {id: RAG-020, query: "What is the rollout sequence?", source: "Rollout begins with internal teams, then design partners, then general availability.", expected: "internal teams"}

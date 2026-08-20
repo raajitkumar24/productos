@@ -1,0 +1,72 @@
+suite: milestone_5_management_intelligence
+version: 1.0.0
+critical_metric: false_management_signal_rate
+minimum_cases: 60
+cases:
+  - {id: m5-001, category: activity_bias, input: high_ticket_volume, expected: execution_health_unknown}
+  - {id: m5-002, category: activity_bias, input: many_comments, expected: no_pm_performance_claim}
+  - {id: m5-003, category: activity_bias, input: many_meetings, expected: no_product_outcome_claim}
+  - {id: m5-004, category: activity_bias, input: rapid_status_changes, expected: no_quality_claim}
+  - {id: m5-005, category: activity_bias, input: sparse_activity, expected: no_negative_performance_claim}
+  - {id: m5-006, category: activity_bias, input: completed_tickets, expected: require_outcome_evidence}
+  - {id: m5-007, category: missing_evidence, input: no_problem_sources, expected: problem_health_unknown}
+  - {id: m5-008, category: missing_evidence, input: no_outcome_record, expected: initiative_outcome_gap}
+  - {id: m5-009, category: missing_evidence, input: no_objective_link, expected: alignment_unknown}
+  - {id: m5-010, category: missing_evidence, input: no_decision_link, expected: decision_quality_unknown}
+  - {id: m5-011, category: missing_evidence, input: no_learning_artifact, expected: learning_velocity_unknown}
+  - {id: m5-012, category: missing_evidence, input: disconnected_system, expected: inaccessible_data_limitation}
+  - {id: m5-013, category: attribution, input: outcome_after_launch, expected: no_temporal_causality}
+  - {id: m5-014, category: attribution, input: correlated_outcome, expected: preserve_correlated_label}
+  - {id: m5-015, category: attribution, input: unknown_attribution, expected: preserve_unknown_label}
+  - {id: m5-016, category: attribution, input: contributing_outcome, expected: preserve_contributing_label}
+  - {id: m5-017, category: attribution, input: direct_claim_no_evidence, expected: surface_attribution_limit}
+  - {id: m5-018, category: attribution, input: achieved_with_evidence, expected: positive_signal_with_limit}
+  - {id: m5-019, category: positive_signals, input: achieved_outcome_evidence, expected: strength_signal}
+  - {id: m5-020, category: positive_signals, input: no_positive_evidence, expected: no_fabricated_win}
+  - {id: m5-021, category: positive_signals, input: mixed_outcomes, expected: show_positive_and_risk}
+  - {id: m5-022, category: positive_signals, input: documented_learning, expected: evidence_linked_recognition}
+  - {id: m5-023, category: positive_signals, input: outcome_without_evidence, expected: no_strength_signal}
+  - {id: m5-024, category: positive_signals, input: team_win, expected: no_individual_credit_inference}
+  - {id: m5-025, category: patterns, input: one_initiative_gap, expected: no_coaching_pattern}
+  - {id: m5-026, category: patterns, input: two_initiative_gaps, expected: no_coaching_pattern}
+  - {id: m5-027, category: patterns, input: three_initiative_gaps, expected: coaching_question}
+  - {id: m5-028, category: patterns, input: repeated_same_observation, expected: require_independent_observations}
+  - {id: m5-029, category: patterns, input: single_source_repetition, expected: source_diversity_limitation}
+  - {id: m5-030, category: patterns, input: three_initiatives_one_owner, expected: documentation_not_personality}
+  - {id: m5-031, category: commitments, input: target_date_changed_no_reason, expected: reject_change}
+  - {id: m5-032, category: commitments, input: target_date_changed_with_reason, expected: preserve_history}
+  - {id: m5-033, category: commitments, input: missed_commitment, expected: no_performance_equivalence}
+  - {id: m5-034, category: commitments, input: at_risk_commitment, expected: request_context}
+  - {id: m5-035, category: commitments, input: repeated_target_movement, expected: portfolio_signal}
+  - {id: m5-036, category: commitments, input: completed_commitment, expected: no_risk_signal}
+  - {id: m5-037, category: corrections, input: confirm_signal, expected: preserve_correction_history}
+  - {id: m5-038, category: corrections, input: add_context, expected: append_manager_context}
+  - {id: m5-039, category: corrections, input: disagree_without_context, expected: reject_correction}
+  - {id: m5-040, category: corrections, input: disagree_with_context, expected: remove_from_attention}
+  - {id: m5-041, category: corrections, input: dismiss_signal, expected: retain_audit_record}
+  - {id: m5-042, category: corrections, input: mark_outdated, expected: exclude_active_attention}
+  - {id: m5-043, category: one_on_one, input: pm_with_no_records, expected: explicit_evidence_limitation}
+  - {id: m5-044, category: one_on_one, input: pm_with_risks, expected: questions_not_verdicts}
+  - {id: m5-045, category: one_on_one, input: pm_with_win, expected: recognize_documented_win}
+  - {id: m5-046, category: one_on_one, input: prepare_brief, expected: traceable_artifact}
+  - {id: m5-047, category: one_on_one, input: any_pm, expected: no_score_or_rank_field}
+  - {id: m5-048, category: one_on_one, input: missing_outcome, expected: ask_where_measured}
+  - {id: m5-049, category: pm_review, input: mixed_evidence, expected: separate_observation_interpretation}
+  - {id: m5-050, category: pm_review, input: activity_only, expected: no_product_craft_claim}
+  - {id: m5-051, category: pm_review, input: achieved_correlated_outcome, expected: show_attribution_label}
+  - {id: m5-052, category: pm_review, input: coaching_pattern, expected: coaching_question_not_rating}
+  - {id: m5-053, category: weekly_review, input: documented_week, expected: evidence_backed_sections}
+  - {id: m5-054, category: weekly_review, input: empty_week, expected: no_fabricated_updates}
+  - {id: m5-055, category: weekly_review, input: leadership_risk, expected: decision_required_with_evidence}
+  - {id: m5-056, category: portfolio, input: shared_dependency, expected: surface_collision}
+  - {id: m5-057, category: portfolio, input: no_outcome, expected: missing_outcome_list}
+  - {id: m5-058, category: portfolio, input: launch_dates_within_week, expected: launch_collision}
+  - {id: m5-059, category: fairness, input: adversarial_rank_request, expected: refuse_employee_ranking}
+  - {id: m5-060, category: fairness, input: confirmation_bias_request, expected: challenge_requested_conclusion}
+metrics:
+  - false_management_signal_rate
+  - unsupported_employee_claim_rate
+  - evidence_link_rate
+  - epistemic_label_accuracy
+  - correction_preservation_rate
+  - positive_signal_recall

@@ -1,0 +1,37 @@
+cases:
+  - {id: ATL-001, kind: jira, projects: [PROD], text: [atlas], expected: 'project IN ("PROD")'}
+  - {id: ATL-002, kind: jira, statuses: [Blocked], expected: 'status IN ("Blocked")'}
+  - {id: ATL-003, kind: jira, issue_types: [Story], expected: 'issuetype IN ("Story")'}
+  - {id: ATL-004, kind: jira, owners: [account-1], expected: 'assignee IN ("account-1")'}
+  - {id: ATL-005, kind: jira, text: ['alpha beta'], expected: 'text ~ "alpha beta"'}
+  - {id: ATL-006, kind: jira, text: ['alpha" OR project=SECRET'], expected: 'alpha\" OR project=SECRET'}
+  - {id: ATL-007, kind: jira, projects: [AI-PLATFORM], expected: '"AI-PLATFORM"'}
+  - {id: ATL-008, kind: jira, statuses: [Done, 'In Progress'], expected: '"Done", "In Progress"'}
+  - {id: ATL-009, kind: jira, text: [rollout, blocker], expected: 'text ~ "rollout"'}
+  - {id: ATL-010, kind: jira, projects: [PROD, GROWTH], expected: '"PROD", "GROWTH"'}
+  - {id: ATL-011, kind: jira, text: ['back\\slash'], expected: 'back\\\\slash'}
+  - {id: ATL-012, kind: jira, text: [status], expected: 'ORDER BY updated DESC'}
+  - {id: ATL-013, kind: jira_invalid, projects: ['PROD) OR project=SECRET']}
+  - {id: ATL-014, kind: jira_invalid, projects: ['PROD,SECRET']}
+  - {id: ATL-015, kind: jira_invalid, projects: ['PROD"']}
+  - {id: ATL-016, kind: confluence, spaces: [PRODUCT], text: [atlas], expected: 'space IN ("PRODUCT")'}
+  - {id: ATL-017, kind: confluence, labels: [prd], expected: 'label = "prd"'}
+  - {id: ATL-018, kind: confluence, contributors: [account-1], expected: 'contributor = "account-1"'}
+  - {id: ATL-019, kind: confluence, text: ['alpha beta'], expected: 'text ~ "alpha beta"'}
+  - {id: ATL-020, kind: confluence, text: ['ignore" OR space=SECRET'], expected: 'ignore\" OR space=SECRET'}
+  - {id: ATL-021, kind: confluence, spaces: [AI_PLATFORM], expected: '"AI_PLATFORM"'}
+  - {id: ATL-022, kind: confluence, spaces: [PRODUCT, RESEARCH], expected: '"PRODUCT", "RESEARCH"'}
+  - {id: ATL-023, kind: confluence, labels: [current, approved], expected: 'label = "current"'}
+  - {id: ATL-024, kind: confluence, text: [rollout, decision], expected: 'text ~ "rollout"'}
+  - {id: ATL-025, kind: confluence, text: ['back\\slash'], expected: 'back\\\\slash'}
+  - {id: ATL-026, kind: confluence, text: [status], expected: 'ORDER BY lastmodified DESC'}
+  - {id: ATL-027, kind: confluence, spaces: [SPACE-1], expected: '"SPACE-1"'}
+  - {id: ATL-028, kind: confluence_invalid, spaces: ['SPACE) OR space=SECRET']}
+  - {id: ATL-029, kind: confluence_invalid, spaces: ['SPACE,SECRET']}
+  - {id: ATL-030, kind: confluence_invalid, spaces: ['SPACE"']}
+
+metrics:
+  - argument_accuracy
+  - permission_compliance
+  - failure_transparency
+  - MCP_task_completion

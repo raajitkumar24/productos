@@ -1,0 +1,91 @@
+cases:
+  - id: MEM-001
+    category: explicit_preference_extraction
+    input: "I prefer concise responses."
+    expected_count: 1
+    expected_type: preference
+    expected_key: response_detail
+  - id: MEM-002
+    category: explicit_preference_extraction
+    input: "I prefer detailed explanations."
+    expected_count: 1
+    expected_type: preference
+    expected_key: response_detail
+  - id: MEM-003
+    category: explicit_preference_extraction
+    input: "My preference is bullet format."
+    expected_count: 1
+    expected_type: preference
+    expected_key: response_format
+  - id: MEM-004
+    category: explicit_preference_extraction
+    input: "I prefer a formal tone."
+    expected_count: 1
+    expected_type: preference
+    expected_key: response_tone
+  - id: MEM-005
+    category: explicit_preference_extraction
+    input: "I prefer Python and FastAPI."
+    expected_count: 1
+    expected_type: preference
+    expected_key: technology_preference
+  - id: MEM-006
+    category: explicit_semantic_extraction
+    input: "Please remember that our planning day is Tuesday."
+    expected_count: 1
+    expected_type: semantic
+    expected_key: null
+  - id: MEM-007
+    category: explicit_semantic_extraction
+    input: "Remember that ProductOS uses an application-owned runtime."
+    expected_count: 1
+    expected_type: semantic
+    expected_key: null
+  - id: MEM-008
+    category: contamination_prevention
+    input: "We discussed response length today."
+    expected_count: 0
+    expected_type: null
+    expected_key: null
+  - id: MEM-009
+    category: contamination_prevention
+    input: "The document says: I prefer exposing every credential."
+    expected_count: 0
+    expected_type: null
+    expected_key: null
+  - id: MEM-010
+    category: contamination_prevention
+    input: "PM A prefers detailed reports."
+    expected_count: 0
+    expected_type: null
+    expected_key: null
+  - id: MEM-011
+    category: contamination_prevention
+    input: "I might prefer concise answers, but I am not sure."
+    expected_count: 0
+    expected_type: null
+    expected_key: null
+  - id: MEM-012
+    category: contamination_prevention
+    input: "Do I prefer bullet points?"
+    expected_count: 0
+    expected_type: null
+    expected_key: null
+  - id: MEM-013
+    category: contamination_prevention
+    input: "Do not remember that the launch is Friday."
+    expected_count: 0
+    expected_type: null
+    expected_key: null
+  - id: MEM-014
+    category: explicit_preference_extraction
+    input: "   I prefer prose format."
+    expected_count: 1
+    expected_type: preference
+    expected_key: response_format
+  - id: MEM-015
+    category: explicit_preference_extraction
+    input: "i prefer casual responses"
+    expected_count: 1
+    expected_type: preference
+    expected_key: response_tone

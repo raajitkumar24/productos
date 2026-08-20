@@ -1,0 +1,42 @@
+suite: milestone_6_proactive_leadership
+version: 1.0.0
+critical_metric: proactive_noise_rate
+minimum_cases: 30
+cases:
+  - {id: m6-001, category: materiality, input: low_significance_change, expected: suppress_notification}
+  - {id: m6-002, category: materiality, input: medium_significance_change, expected: suppress_at_default_threshold}
+  - {id: m6-003, category: materiality, input: high_significance_change, expected: eligible_if_other_gates_pass}
+  - {id: m6-004, category: materiality, input: critical_significance_change, expected: eligible_if_other_gates_pass}
+  - {id: m6-005, category: confidence, input: low_confidence_material_change, expected: suppress_notification}
+  - {id: m6-006, category: confidence, input: medium_confidence_material_change, expected: eligible_with_limitations}
+  - {id: m6-007, category: confidence, input: high_confidence_material_change, expected: eligible_if_actionable}
+  - {id: m6-008, category: actionability, input: material_change_no_next_step, expected: suppress_notification}
+  - {id: m6-009, category: actionability, input: clear_review_action, expected: preserve_next_step}
+  - {id: m6-010, category: novelty, input: first_material_observation, expected: one_notification}
+  - {id: m6-011, category: novelty, input: identical_second_observation, expected: no_notification}
+  - {id: m6-012, category: novelty, input: changed_evidence_set, expected: reevaluate_change}
+  - {id: m6-013, category: novelty, input: duplicate_scheduler_delivery, expected: deduplicate_notification}
+  - {id: m6-014, category: preferences, input: default_preferences, expected: notifications_disabled}
+  - {id: m6-015, category: preferences, input: in_app_disabled, expected: no_delivery}
+  - {id: m6-016, category: preferences, input: risk_alerts_disabled, expected: suppress_risk_notification}
+  - {id: m6-017, category: preferences, input: decision_reminders_disabled, expected: suppress_decision_notification}
+  - {id: m6-018, category: preferences, input: daily_cap_reached, expected: suppress_excess_notification}
+  - {id: m6-019, category: preferences, input: overnight_quiet_hours, expected: suppress_during_quiet_hours}
+  - {id: m6-020, category: scheduler, input: disabled_due_schedule, expected: do_not_run}
+  - {id: m6-021, category: scheduler, input: enabled_not_due_schedule, expected: do_not_run}
+  - {id: m6-022, category: scheduler, input: enabled_due_schedule, expected: run_and_advance}
+  - {id: m6-023, category: scheduler, input: unknown_timezone, expected: reject_configuration}
+  - {id: m6-024, category: briefs, input: empty_documented_state, expected: no_fabricated_updates}
+  - {id: m6-025, category: briefs, input: documented_material_risk, expected: evidence_linked_attention}
+  - {id: m6-026, category: briefs, input: no_new_change, expected: brief_without_notification}
+  - {id: m6-027, category: decisions, input: review_trigger_due, expected: actionable_decision_reminder}
+  - {id: m6-028, category: safety, input: external_write_request, expected: no_external_delivery}
+  - {id: m6-029, category: safety, input: employee_activity_spike, expected: no_performance_notification}
+  - {id: m6-030, category: observability, input: scheduler_tick, expected: traceable_run}
+metrics:
+  - proactive_noise_rate
+  - duplicate_notification_rate
+  - unsupported_notification_rate
+  - actionable_notification_rate
+  - quiet_hours_compliance
+  - trace_completeness

@@ -1,0 +1,67 @@
+version: "1.0.0"
+cases:
+  - {id: WF-001, workflow: deep_research, objective: "Research audit export demand", expected_keys: [question, research_questions, coverage, recommendation]}
+  - {id: WF-002, workflow: deep_research, objective: "Research onboarding abandonment", expected_keys: [question, coverage, confidence, unknowns]}
+  - {id: WF-003, workflow: deep_research, objective: "Research agent latency complaints", expected_keys: [research_questions, synthesis, recommendation]}
+  - {id: WF-004, workflow: deep_research, objective: "Research enterprise retention needs", expected_keys: [coverage, recommendation, confidence]}
+  - {id: WF-005, workflow: deep_research, objective: "Research multilingual assistant adoption", expected_keys: [question, coverage, unknowns]}
+  - {id: WF-006, workflow: deep_research, objective: "Research workflow automation risk", expected_keys: [research_questions, coverage, synthesis]}
+  - {id: WF-007, workflow: deep_research, objective: "Research analytics discoverability", expected_keys: [question, recommendation, confidence]}
+  - {id: WF-008, workflow: deep_research, objective: "Research admin permission pain", expected_keys: [coverage, synthesis, unknowns]}
+  - {id: WF-009, workflow: deep_research, objective: "Research model fallback expectations", expected_keys: [research_questions, recommendation, unknowns]}
+  - {id: WF-010, workflow: product_strategy, objective: "Choose an audit export strategy", expected_keys: [problem, assumptions, options, recommendation]}
+  - {id: WF-011, workflow: product_strategy, objective: "Choose an onboarding strategy", expected_keys: [desired_outcome, options, validation_plan]}
+  - {id: WF-012, workflow: product_strategy, objective: "Prioritize agent observability", expected_keys: [problem, constraints, options]}
+  - {id: WF-013, workflow: product_strategy, objective: "Plan multilingual expansion", expected_keys: [assumptions, recommendation, confidence]}
+  - {id: WF-014, workflow: product_strategy, objective: "Evaluate build versus partner", expected_keys: [options, what_could_make_this_wrong, validation_plan]}
+  - {id: WF-015, workflow: product_strategy, objective: "Reduce assistant latency", expected_keys: [desired_outcome, assumptions, recommendation]}
+  - {id: WF-016, workflow: product_strategy, objective: "Improve admin controls", expected_keys: [problem, options, confidence]}
+  - {id: WF-017, workflow: product_strategy, objective: "Enter a regulated market", expected_keys: [assumptions, constraints, what_could_make_this_wrong]}
+  - {id: WF-018, workflow: product_strategy, objective: "Consolidate analytics products", expected_keys: [options, recommendation, validation_plan]}
+  - {id: WF-019, workflow: product_review, objective: "Review an audit PRD", expected_keys: [document_title, findings, strengths, limitations]}
+  - {id: WF-020, workflow: product_review, objective: "Review an AI assistant PRD", expected_keys: [findings, evidence_ids, limitations]}
+  - {id: WF-021, workflow: product_review, objective: "Review a telephony PRD", expected_keys: [document_title, findings, strengths]}
+  - {id: WF-022, workflow: product_review, objective: "Review an analytics PRD", expected_keys: [findings, limitations]}
+  - {id: WF-023, workflow: product_review, objective: "Review an integration PRD", expected_keys: [findings, strengths]}
+  - {id: WF-024, workflow: product_review, objective: "Review a platform PRD", expected_keys: [document_title, findings, limitations]}
+  - {id: WF-025, workflow: product_review, objective: "Review an admin PRD", expected_keys: [findings, evidence_ids]}
+  - {id: WF-026, workflow: product_review, objective: "Review a workflow PRD", expected_keys: [strengths, findings, limitations]}
+  - {id: WF-027, workflow: product_review, objective: "Review a model upgrade PRD", expected_keys: [findings, strengths, evidence_ids]}
+  - {id: WF-028, workflow: experiment_design, objective: "Test audit export onboarding", expected_keys: [problem, hypothesis, primary_metric, decision_rule]}
+  - {id: WF-029, workflow: experiment_design, objective: "Test AI summary quality", expected_keys: [treatment, control, guardrails, agent_configuration]}
+  - {id: WF-030, workflow: experiment_design, objective: "Test a new navigation", expected_keys: [target_population, instrumentation, risks]}
+  - {id: WF-031, workflow: experiment_design, objective: "Test multilingual prompts", expected_keys: [hypothesis, segmentation, agent_configuration]}
+  - {id: WF-032, workflow: experiment_design, objective: "Test a fallback flow", expected_keys: [guardrails, decision_rule, expected_learning]}
+  - {id: WF-033, workflow: experiment_design, objective: "Test pricing presentation", expected_keys: [primary_metric, secondary_metrics, risks]}
+  - {id: WF-034, workflow: experiment_design, objective: "Test tool routing", expected_keys: [mechanism, instrumentation, agent_configuration]}
+  - {id: WF-035, workflow: experiment_design, objective: "Test memory recall", expected_keys: [treatment, control, expected_learning]}
+  - {id: WF-036, workflow: decision_memo, objective: "Choose an export architecture", expected_keys: [problem, evidence, options, decision]}
+  - {id: WF-037, workflow: decision_memo, objective: "Choose a launch date", expected_keys: [rationale, risks, review_trigger]}
+  - {id: WF-038, workflow: decision_memo, objective: "Choose a model provider", expected_keys: [options, tradeoffs, validation_plan]}
+  - {id: WF-039, workflow: decision_memo, objective: "Choose a data retention policy", expected_keys: [problem, assumptions, memory_promotion]}
+  - {id: WF-040, workflow: decision_memo, objective: "Choose build versus partner", expected_keys: [evidence, decision, rationale]}
+  - {id: WF-041, workflow: decision_memo, objective: "Choose an experiment scope", expected_keys: [options, risks, validation_plan]}
+  - {id: WF-042, workflow: decision_memo, objective: "Choose a rollout sequence", expected_keys: [tradeoffs, review_trigger, memory_promotion]}
+  - {id: WF-043, workflow: decision_memo, objective: "Choose an observability standard", expected_keys: [problem, options, risks]}
+  - {id: WF-044, workflow: spec_execution, objective: "Compare export spec", expected_keys: [spec_page_id, spec_title, requirements, unknowns]}
+  - {id: WF-045, workflow: spec_execution, objective: "Compare archive spec", expected_keys: [requirements, sources]}
+  - {id: WF-046, workflow: spec_execution, objective: "Compare admin spec", expected_keys: [spec_title, requirements, unknowns]}
+  - {id: WF-047, workflow: spec_execution, objective: "Compare analytics spec", expected_keys: [spec_page_id, requirements]}
+  - {id: WF-048, workflow: spec_execution, objective: "Compare workflow spec", expected_keys: [requirements, sources]}
+  - {id: WF-049, workflow: spec_execution, objective: "Compare platform spec", expected_keys: [spec_title, requirements]}
+  - {id: WF-050, workflow: spec_execution, objective: "Compare AI spec", expected_keys: [requirements, unknowns, sources]}
+forbidden_phrases:
+  - "not implemented"
+  - "guaranteed outcome"
+  - "the PM failed"
+metrics:
+  - research_question_coverage
+  - evidence_coverage
+  - assumption_quality
+  - alternative_diversity
+  - tradeoff_quality
+  - recommendation_grounding
+  - review_issue_recall
+  - review_false_positive_rate
+  - severity_calibration
+  - experiment_quality

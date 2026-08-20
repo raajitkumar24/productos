@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: productos-scheduler-scope
+data:
+  tenant-id: "replace-with-tenant-uuid"
+  user-id: "replace-with-user-uuid"
